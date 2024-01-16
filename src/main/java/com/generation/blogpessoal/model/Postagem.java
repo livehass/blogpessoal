@@ -4,10 +4,13 @@ import java.time.LocalDateTime;
 
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -24,6 +27,7 @@ public class Postagem {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
+	
 	@Getter
 	@Setter
 	@NotBlank(message = "O Atributo é de preenchimento obrigatório")
@@ -40,8 +44,12 @@ public class Postagem {
 	@Setter
 	@UpdateTimestamp
 	private LocalDateTime data;
-
-
+	
+	@Getter
+	@Setter
+	@ManyToOne
+	@JsonIgnoreProperties("Postagem")
+	private Tema tema;
 }
 
 
