@@ -1,6 +1,5 @@
 package com.generation.blogpessoal.service;
 
-
 import com.generation.blogpessoal.model.Usuario;
 import com.generation.blogpessoal.model.UsuarioLogin;
 import com.generation.blogpessoal.repository.UsuarioRepository;
