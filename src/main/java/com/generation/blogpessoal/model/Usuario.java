@@ -35,7 +35,7 @@ public class Usuario {
     @Size(max=5000, message = "O atributo foto não pode ser maior quuue 5000 caracteres")
     private String foto;
 
-    @OneToMany(mappedBy = "unuario", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE)
     @JsonIgnoreProperties("usuario")
     private List<Postagem> postagem;
 
