@@ -15,4 +15,5 @@ public class UsuarioLogin {
     private String foto;
     private String token;
 
+   
 }
