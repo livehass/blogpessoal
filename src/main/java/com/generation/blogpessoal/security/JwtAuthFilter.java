@@ -1,6 +1,5 @@
 package com.generation.blogpessoal.security;
 
-
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.UnsupportedJwtException;
