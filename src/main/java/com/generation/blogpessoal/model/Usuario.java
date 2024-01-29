@@ -8,12 +8,14 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
 
 @Entity
 @Table(name = "tb_usuarios")
+@NoArgsConstructor
 @Getter
 @Setter
 public class Usuario {
@@ -37,7 +39,18 @@ public class Usuario {
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE)
     @JsonIgnoreProperties("usuario")
+
     private List<Postagem> postagem;
+
+    public Usuario(Long id, String nome, String usuario, String senha, String foto) {
+        this.id = id;
+        this.nome = nome;
+        this.usuario = usuario;
+        this.senha = senha;
+        this.foto = foto;
+    }
+    public Usuario() {	}
+
 
 }
 
