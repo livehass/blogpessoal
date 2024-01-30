@@ -2,20 +2,19 @@ package com.generation.blogpessoal.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
 
 @Entity
 @Table(name = "tb_usuarios")
-@NoArgsConstructor
 @Getter
 @Setter
 public class Usuario {
@@ -26,6 +25,7 @@ public class Usuario {
     @NotNull(message = "O atributo nome é obrigatório")
     private String nome;
 
+    @Schema(example = "email@email.com.br")
     @NotNull(message = "O atributo usuário é obrigatório")
     @Email(message = "O atributo usuário deve ser um e-mail válido")
     private String usuario;
