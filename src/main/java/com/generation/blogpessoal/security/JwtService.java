@@ -1,6 +1,5 @@
 package com.generation.blogpessoal.security;
 
-
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -18,7 +17,7 @@ import java.util.function.Function;
 @Component
 public class JwtService {
 
-    public static final String SECRET = "bfcc43505ce8e0998df63d7458af653fdfcbca30fb882cf1a9c43c014a8a5ef7";
+    public static final String SECRET = "e1dd361caf300ff8934ba00d559e679aa7817e1ccecc73da6008dfa47432d3ba";
 
     private Key getSignKey() {
         byte[] keyBytes = Decoders.BASE64.decode(SECRET);
@@ -29,10 +28,10 @@ public class JwtService {
         return Jwts.parserBuilder()
                 .setSigningKey(getSignKey()).build()
                 .parseClaimsJws(token).getBody();
-
     }
-    public <T> T extractClaim(String token, Function<Claims, T> claimsResolver){
-    final Claims claims = extractAllClaims(token);
+
+    public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
+        final Claims claims = extractAllClaims(token);
         return claimsResolver.apply(claims);
     }
 
@@ -41,10 +40,10 @@ public class JwtService {
     }
 
     public Date extractExpiration(String token) {
-           return extractClaim(token, Claims::getExpiration);
+        return extractClaim(token, Claims::getExpiration);
     }
 
-    public Boolean isTokenExpired(String token) {
+    private Boolean isTokenExpired(String token) {
         return extractExpiration(token).before(new Date());
     }
 
@@ -59,8 +58,9 @@ public class JwtService {
                 .setSubject(userName)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60))
-                .signWith(getSignKey(), SignatureAlgorithm.HS256).compact() ;
+                .signWith(getSignKey(), SignatureAlgorithm.HS256).compact();
     }
+
     public String generateToken(String userName) {
         Map<String, Object> claims = new HashMap<>();
         return createToken(claims, userName);

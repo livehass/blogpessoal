@@ -1,30 +1,28 @@
 package com.generation.blogpessoal.security;
 
 import com.generation.blogpessoal.model.Usuario;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.io.Serial;
 import java.util.Collection;
 import java.util.List;
 
-@NoArgsConstructor
-@Getter
-@Setter
 public class UserDetailsImpl implements UserDetails {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     private String userName;
-    private String passWord;
-
+    private String password;
     private List<GrantedAuthority> authorities;
 
     public UserDetailsImpl(Usuario user) {
         this.userName = user.getUsuario();
-        this.passWord = user.getSenha();
+        this.password = user.getSenha();
+    }
+
+    public UserDetailsImpl() {
     }
 
     @Override
@@ -34,7 +32,7 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public String getPassword() {
-        return passWord;
+        return password;
     }
 
     @Override
@@ -62,4 +60,3 @@ public class UserDetailsImpl implements UserDetails {
         return true;
     }
 }
-

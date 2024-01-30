@@ -25,44 +25,37 @@ public class UsuarioController {
     private UsuarioRepository usuarioRepository;
 
     @GetMapping("/all")
-    public ResponseEntity <List<Usuario>> getAll(){
-
+    public ResponseEntity<List<Usuario>> findAll() {
         return ResponseEntity.ok(usuarioRepository.findAll());
-
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Usuario> getById(@PathVariable Long id) {
+    public ResponseEntity<Usuario> findById(@PathVariable Long id) {
         return usuarioRepository.findById(id)
-                .map(resposta -> ResponseEntity.ok(resposta))
+                .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PostMapping("/logar")
-    public ResponseEntity<UsuarioLogin> autenticarUsuario(@RequestBody Optional<UsuarioLogin> usuarioLogin){
-
+    @PostMapping("/login")
+    public ResponseEntity<UsuarioLogin> autenticarUsuario(@RequestBody Optional<UsuarioLogin> usuarioLogin) {
         return usuarioService.autenticarUsuario(usuarioLogin)
-                .map(resposta -> ResponseEntity.status(HttpStatus.OK).body(resposta))
+                .map(response -> ResponseEntity.status(HttpStatus.OK).body(response))
                 .orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
     }
 
-
     @PostMapping("/cadastrar")
-    public ResponseEntity<Usuario> postUsuario(@RequestBody @Valid Usuario usuario) {
-
+    public  ResponseEntity<Usuario> createUsuario(@Valid @RequestBody Usuario usuario) {
+        usuario.setAdmin(false);
         return usuarioService.cadastrarUsuario(usuario)
-                .map(resposta -> ResponseEntity.status(HttpStatus.CREATED).body(resposta))
+                .map(response -> ResponseEntity.status(HttpStatus.CREATED).body(response))
                 .orElse(ResponseEntity.status(HttpStatus.BAD_REQUEST).build());
-
     }
 
     @PutMapping("/atualizar")
-    public ResponseEntity<Usuario> putUsuario(@Valid @RequestBody Usuario usuario) {
-
+    public ResponseEntity<Usuario> updateUsuario(@Valid @RequestBody Usuario usuario) {
         return usuarioService.atualizarUsuario(usuario)
-                .map(resposta -> ResponseEntity.status(HttpStatus.OK).body(resposta))
+                .map(response -> ResponseEntity.status(HttpStatus.OK).body(response))
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
-
     }
 
 }
