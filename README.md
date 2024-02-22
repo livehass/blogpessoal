@@ -1,2 +1,2 @@
 # BlogPessoalJava
-Blog pessoal java, mysql 
+Back-end part of a java mysql blog
